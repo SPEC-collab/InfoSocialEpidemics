@@ -48,7 +48,6 @@ class MobilityType(Enum):
     LOCAL_ONLY = 2
     BETWEEN_GRIDS = 3
 
-
 class ISEpiAgent(Agent):
     """ An agent representing a potential covid case"""
     
@@ -63,36 +62,12 @@ class ISEpiAgent(Agent):
         self.prob_contagion = self.model.prob_contagion
        
         # Mortality in vulnerable population appears to be around day 2-3
-        self.mortality_value = mort/(self.model.dwell_15_day*self.recovery_time)
+        self.mortality_value = self.model.mortality_rate/(self.model.dwell_15_day*self.recovery_time)
         # Severity appears to appear after day 5
-        self.severity_value = model.prob_severe/(self.model.dwell_15_day*self.recovery_time)
+        self.severity_value = self.model.prob_severe/(self.model.dwell_15_day*self.recovery_time)
         self.curr_dwelling = 0
         self.curr_incubation = 0
         self.curr_recovery = 0
-        self.curr_asymptomatic = 0
-        # Isolation measures are set at the model step level
-        self.isolated = False
-        self.isolated_but_inefficient = False
-        # Contagion probability is local
-        self.test_chance = 0
-        # Horrible hack for isolation step
-        self.in_isolation = False
-        self.in_distancing = False
-        self.in_testing = False
-        self.astep = 0
-        self.tested = False
-        # Economic assumptions
-        self.cumul_private_value = 0
-        self.cumul_public_value = 0
-        # Employment
-        self.employed = True
-        # Contact tracing: this is only available for symptomatic patients
-        self.tested_traced = False
-        # All agents 
-        self.contacts = set()
-        # We assume it takes two full days
-        self.tracing_delay = 2*model.dwell_15_day
-        self.tracing_counter = 0
         
     def alive(self):
         print(f'{self.unique_id} {self.age_group} {self.sex_group} is alive')
@@ -270,6 +245,8 @@ class ISEpiModel(Model):
     change the course of events for the usual SIRD model due to changes in the underlying
     mean field theory.
     """
+    dwell_15_day = 96
+    
     def __init__(self, epidemiology, gridworld, network, social, scheduler, dummy=0):
         self.running = True
         self.schedule = GrahamActivation(self) if (scheduler == "graham") else RandomActivation(self)

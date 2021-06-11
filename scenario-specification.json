@@ -1,0 +1,45 @@
+{
+    "description": "Callibration run from 0.1% to 1.0% from April 21 to July 8th",
+    "prepared-by": "SPEC collaborative",
+    "date": "2021.06.11",
+    "model": {
+        "scheduler": "graham",
+        "epidemiology": {
+            "prop_initial_infected": 0.001,
+            "avg_incubation_time": 6,
+            "avg_recovery_time": 10,
+            "prob_contagion": 0.004,
+            "mortality_rate": 0.013
+        },
+        "gridword": {
+            "city_a": {      
+                "num_agents": 1000,
+                "width": 200,
+                "height": 200,
+                "isolated": 0.2,
+                "local_only": 0.7,
+                "commuters": 0.1
+            },
+            "city_b": {
+                "num_agents": 2000,
+                "width": 250,
+                "height": 250,
+                "isolated": 0.2,
+                "local_only": 0.65,
+                "commuters": 0.15
+            }
+        },
+        "network": {
+
+        },
+        "social": {
+        }
+    },
+    "ensemble": {
+        "days": 3840,
+        "runs": 30
+    },
+    "output": {
+        "prefix": "outcomes/cu-current-R0-callibration"
+    }
+}
