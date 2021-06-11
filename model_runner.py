@@ -1,9 +1,9 @@
-# Santiago Nunez-Corrales and Eric Jakobsson
-# Illinois Informatics and Molecular and Cell Biology
-# University of Illinois at Urbana-Champaign
-# {nunezco,jake}@illinois.edu
+# Information/Social Epidemiology
+#
+# SPEC collaborative
+#
+# 2021
 
-# A simple tunable model for COVID-19 response
 from batchrunner_local import BatchRunnerMP
 from multiprocessing import freeze_support
 from isepi import ISEpiModel
