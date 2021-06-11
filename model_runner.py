@@ -28,8 +28,6 @@ print("")
 print("Attempting to configure model from file...")
 
 model_params = {
-    #"prop_initial_infected": data["model"]["epidemiology"]["prop_initial_infected"],
-    #"avg_recovery_time": data["model"]["epidemiology"]["avg_recovery_time"],
     "epidemiology": data["model"]["epidemiology"]
 }
 
